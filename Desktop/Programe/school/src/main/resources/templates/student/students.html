@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a class="active" href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Students</h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Date Of Birth</td>
+            <td>Catalog</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="studentDto: ${studentListDto}">
+            <td th:text="${studentDto.studentId}">Id</td>
+            <td th:text="${studentDto.studentLastName} + ' ' + ${studentDto.studentFirstName}">Name</td>
+            <td th:text="${studentDto.studentDateOfBirth}">Date Of Birth</td>
+            <td><a th:href="@{/catalogForStudents(studentId=${studentDto.studentId})}">catalog</a></td>
+            <td>
+                <a th:href="@{/deleteStudent(studentId=${studentDto.studentId})}">
+                    <i class="fa-solid fa-trash-can" style="color: #7f94b8; margin-left: auto;
+                margin-right: auto;"></i>
+                </a>
+                <a th:href="@{/studentModify(studentId=${studentDto.studentId})}">
+                    <i class="fa-regular fa-pen-to-square" style="color: #6f8ab8; padding: 3px;"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

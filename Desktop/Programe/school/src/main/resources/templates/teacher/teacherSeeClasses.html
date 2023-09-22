@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Classes</title>
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+    h1 {
+      text-align: center;
+    }
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a class="active" href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Classes for <span th:utext="${teacherFirstName} + ' ' + ${teacherLastName}"></span>
+    at <span th:utext="${schoolName}"></span></h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Class</td>
+            <td>Action</td>
+
+        </tr>
+        <tr th:each="classOfStudents: ${classesList}">
+            <td th:text="${classOfStudents.classId}">Id</td>
+            <td th:text="${classOfStudents.className}">Name</td>
+            <td><a th:href="@{/deleteClassForTeacher(teacherId=${teacherId}, schoolId=${schoolId},
+      classId=${classOfStudents.classId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; margin-left: auto;
+                margin-right: auto;"></i>
+            </a></td>
+        </tr>
+    </table>
+</div>
+<button><a th:href="@{/addClassesToTeacherList(teacherId=${teacherId},
+schoolId=${schoolId})}">add classes</a></button>
+<button><a th:href="@{/teacherSeesSchools(teacherId=${teacherId})}">Back</a></button>
+</body>
+</html>

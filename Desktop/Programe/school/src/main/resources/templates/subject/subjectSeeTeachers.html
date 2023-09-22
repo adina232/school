@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+    h1 {
+      text-align: center;
+    }
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a class="active" href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Teachers for <span th:utext="${subjectName}"></span></h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Schools</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="teacherDto: ${teacherList}">
+            <td th:text="${teacherDto.teacherId}">Id</td>
+            <td th:text="${teacherDto.teacherFirstName}">First Name</td>
+            <td th:text="${teacherDto.teacherLastName}">Last Name</td>
+            <td><a th:href="@{/teacherSeesSchools(teacherId=${teacherDto.teacherId})}">schools</a></td>
+            <td><a th:href="@{/deleteTeacherFromSubject(subjectId=${subjectId},
+      teacherId=${teacherDto.teacherId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; padding: 3px;"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<button>
+    <a th:href="@{/subjectSeeTeachersToAdd(subjectId=${subjectId})}">Add Teacher</a>
+</button>
+<button><a href="/subjects">Back</a></button>
+</body>
+</html>

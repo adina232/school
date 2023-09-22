@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Schools And Teachers</title>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+          color: black;
+          text-align: center;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a class="active" href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<h1>Schools And Teachers</h1>
+
+<div class="table">
+    <table class="center">
+        <tr>
+            <td>School</td>
+            <td>Teacher First Name</td>
+            <td>Teacher Last Name</td>
+            <td>Subjects</td>
+        </tr>
+        <tr th:each="school2TeacherDto: ${school2TeacherListDto}">
+            <td th:text="${school2TeacherDto.schoolName}">School</td>
+            <td th:text="${school2TeacherDto.teacherFirstName}">Teacher First Name</td>
+            <td th:text="${school2TeacherDto.teacherLastName}">Teacher Last Name</td>
+            <td><a th:href="@{/subjectsForSchool2Teacher
+            (school2TeacherId=${school2TeacherDto.id})}">subjects</a></td>
+
+        </tr>
+    </table>
+</div>
+<button><a href="/">Back</a></button>
+</body>
+</html>

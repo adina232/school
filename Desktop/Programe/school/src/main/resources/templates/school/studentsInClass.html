@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students In Class</title>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a class="active" href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Students in <span th:utext="${className}"></span></h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Date of Birth</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="studentDto: ${studentListInClass}">
+            <td th:text="${studentDto.studentId}">Id</td>
+            <td th:text="${studentDto.studentFirstName}">First Name</td>
+            <td th:text="${studentDto.studentLastName}">Last Name</td>
+            <td th:text="${studentDto.studentDateOfBirth}">Date of Birth</td>
+            <td><a th:href="@{/deleteStudentForClass(classId=${classId},
+                            studentId=${studentDto.studentId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; padding: 3px;"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<button><a th:href="@{/addStudentsToClassList(classId=${classId})}">Add Student</a></button>
+<button><a th:href="@{/classesForSchool(schoolId=${schoolId})}">Back</a></button>
+</body>
+</html>

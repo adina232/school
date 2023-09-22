@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+        text-align: center;
+        color: black;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a class="active" href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Teachers</h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Schools</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="teacherDto: ${teachers}">
+            <td th:text="${teacherDto.teacherId}">Id</td>
+            <td th:text="${teacherDto.teacherFirstName}">Name</td>
+            <td th:text="${teacherDto.teacherLastName}">Address</td>
+            <td><a th:href="@{/teacherSeesSchools(teacherId=${teacherDto.teacherId})}">see schools</a></td>
+            <td><a th:href="@{/deleteTeacher(teacherId=${teacherDto.teacherId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; padding: 3px;"></i></a>
+                <a th:href="@{/modifyTeacher(teacherId=${teacherDto.teacherId})}">
+                    <i class="fa-regular fa-pen-to-square" style="color: #6f8ab8; padding: 3px;"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

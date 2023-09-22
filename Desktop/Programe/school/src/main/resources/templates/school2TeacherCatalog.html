@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" th:href="@{/styles/menu.css}">
+    <link rel="stylesheet" th:href="@{/styles/button.css}">
+    <link rel="stylesheet" th:href="@{/styles/table.css}">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/9470ca765a.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a class="active" href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1><span th:utext="${schoolName}"></span></h1>
+<h1><span th:utext="${teacherName}"></span></h1>
+<h1><span th:utext="${subjectName}"></span></h1>
+<h1><span th:utext="${className}"></span></h1>
+<h1>Catalog</h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Last Name</td>
+            <td>First Name</td>
+            <td>Date Of Birth</td>
+            <td>Grade</td>
+        </tr>
+        <tr th:each="studentDto: ${studentListForCatalog}">
+            <td th:text="${studentDto.studentId}">Id</td>
+            <td th:text="${studentDto.studentLastName}">Last Name</td>
+            <td th:text="${studentDto.studentFirstName}">First Name</td>
+            <td th:text="${studentDto.studentDateOfBirth}">Date Of Birth</td>
+            <td th:switch="${studentDto.grade == 0}">
+                <span th:case="true">
+
+                    <form method="post" th:action="@{/addGrade(
+                            school2TeacherId=${school2TeacherId},
+                            subjectId=${subjectId},
+                            classId=${classId}
+                            )}" th:object="${studentDto}">
+                    <input id="studentId" name="studentId" th:value="${studentDto.studentId}" type="hidden">
+                    <input id="grade" name="grade" th:value="${studentDto.grade}" type="text">
+
+            <input type="submit" value="Submit">
+                    </form>
+
+                </span>
+                <span th:case="false">
+                    <span th:utext="${studentDto.grade}"></span>
+                </span>
+            </td>
+
+        </tr>
+    </table>
+</div>
+<button><a th:href="@{/classesForSubjects(school2TeacherId=${school2TeacherId},
+                            subjectId=${subjectId})}">Back</a></button>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>School Edit</title>
+    <link rel="stylesheet" th:href="@{/styles/menu.css}">
+    <link rel="stylesheet" th:href="@{/styles/form.css}"/>
+    <style>
+      h2 {
+        text-align: center;
+      }
+
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a class="active" href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+
+<h2>Edit School: <span th:utext="${schoolName}"></span></h2>
+
+<div class="form">
+    <form method="POST" th:action="@{/editSchool}" th:object="${schoolDto}">
+        <input id="schoolId" name="schoolId" th:field="*{schoolId}" th:value="${schoolDto.schoolId}"
+               type="hidden">
+
+        <label for="schoolName" style="color: black">School Name</label>
+        <input id="schoolName" name="schoolName" placeholder="School Name" th:field="*{schoolName}"
+               th:value="${schoolDto.schoolName}" type="text">
+
+        <label for="schoolAddress" style="color: black">Address</label>
+        <input id="schoolAddress" name="schoolAddress" placeholder="School Address" th:field="*{schoolAddress}"
+               th:value="${schoolDto.schoolAddress}" type="text">
+        <a href="schools">
+            <input type="submit" value="Edit">
+        </a>
+        <a href="schools">
+            <input type="button" value="Back">
+        </a>
+    </form>
+</div>
+</body>
+</html>

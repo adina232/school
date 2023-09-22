@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Class</title>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <link th:href="@{/styles/form.css}" rel="stylesheet">
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a class="active" href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<h1>Register A New Class</h1>
+<div class="form">
+    <form th:action="@{/addClassToSchool(schoolId=${schoolId})}"
+          th:object="${classOfStudents}" method="post">
+        <input th:field="*{classId}" id="classId" name="classId" type="hidden">
+
+        <label for="className">Class Name</label>
+        <input th:field="*{className}" id="className" name="className" type="text"
+               placeholder="Class Name">
+
+        <label for="classMaster">Class Master</label>
+        <select th:field="*{classMaster}">
+            <option value=""> --</option>
+            <option th:each="option : ${options}"
+                    th:value="${option.teacherId}"
+                    th:text="${option.teacherLastName} + ' ' + ${option.teacherFirstName}"
+                    id="classMaster" name="classMaster"></option>
+        </select>
+
+
+        <a th:href="@{/classesForSchool(schoolId=${schoolId})}">
+            <input type="submit" value="Submit">
+        </a>
+        <a th:href="@{/classesForSchool(schoolId=${schoolId})}">
+            <input type="button" value="Back">
+        </a>
+
+    </form>
+</div>
+</body>
+</html>

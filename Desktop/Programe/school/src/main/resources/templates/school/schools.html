@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Schools</title>
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+
+    <style>
+        h1 {
+        text-align: center;
+        color: black;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a class="active" href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Schools</h1>
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Teachers</td>
+            <td>Classes</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="schoolDto: ${schools}">
+            <td th:text="${schoolDto.schoolId}">Id</td>
+            <td th:text="${schoolDto.schoolName}">Name</td>
+            <td th:text="${schoolDto.schoolAddress}">Address</td>
+            <td><a th:href="@{/seeTeachersForSchool(schoolId=${schoolDto.schoolId})}">teachers</a></td>
+            <td><a th:href="@{/classesForSchool(schoolId=${schoolDto.schoolId})}">classes</a></td>
+            <td><a th:href="@{/deleteSchool(schoolId=${schoolDto.schoolId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; padding: 3px;"></i></a>
+                <a th:href="@{/editSchool(schoolId=${schoolDto.schoolId})}">
+                    <i class="fa-regular fa-pen-to-square" style="color: #6f8ab8; padding: 3px;"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<button><a href="/">Back</a></button>
+</body>
+</html>

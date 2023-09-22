@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add School</title>
+    <link th:href="@{/styles/form.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <style>
+        h1 {
+        text-align: center;
+        color: black;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a class="active" href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Register A School</h1>
+
+<div class="form">
+    <form th:action="@{/schoolForm}" th:object="${school}" method="POST">
+        <input th:field="*{schoolId}" id="schoolId" name="schoolId" type="hidden">
+
+        <label for="schoolName" style="color: black">School Name</label>
+        <input type="text" id="schoolName" name="schoolName" placeholder="School Name"
+               th:field="*{schoolName}">
+
+        <label for="schoolAddress" style="color: black">Address</label>
+        <input type="text" id="schoolAddress" name="schoolAddress" placeholder="School Address"
+               th:field="*{schoolAddress}">
+        <a href="schools">
+            <input type="submit" value="Submit">
+        </a>
+    </form>
+</div>
+
+</body>
+</html>

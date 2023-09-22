@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/button.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a class="active" href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+
+<h1>Catalog - <span th:utext="${className}"></span> - Class Master: <span th:utext="${classMaster}">
+</span></h1>
+<h1>Student: <span th:utext="${studentLastName} + ' ' + ${studentFirstName}"></span></h1>
+
+<div class="table">
+    <table>
+        <tr>
+            <td>Subject</td>
+            <td>Teacher</td>
+            <td>Grade</td>
+        </tr>
+        <tr th:each="subjectDto: ${subjectList}">
+            <td th:text="${subjectDto.subjectName}">Subject</td>
+            <td th:text="${subjectDto.teacher}">Teacher</td>
+            <td th:text="${subjectDto.grade}">Grade</td>
+        </tr>
+    </table>
+</div>
+<a href="/students">
+    <button>Back</button>
+</a>
+</body>
+</html>

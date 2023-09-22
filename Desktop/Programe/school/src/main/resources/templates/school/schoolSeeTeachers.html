@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>See Teachers</title>
+    <link th:href="@{/styles/table.css}" rel="stylesheet">
+    <link th:href="@{/styles/menu.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9470ca765a.js" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+        text-align: center;
+        color: black;
+        }
+        input[type=button]:hover {
+        background-color: #d0f1f5;
+        }
+        input[type=button] {
+        width: 100px;
+        height: 25px;
+        background-color: #85cbd4;
+        color: black;
+        padding: 14px, 20px;
+        margin-top: 20px;
+        margin-left: 47%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/schoolForm">Add School</a></li>
+        <li><a class="active" href="/schools">Schools</a></li>
+        <li><a href="/teacherForm">Teacher Register</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/schoolsAndTeachers">Schools And Teachers</a></li>
+        <li><a href="/subjectHome">Subjects</a></li>
+        <li><a href="/studentHome">Students</a></li>
+    </ul>
+</div>
+<hr>
+<h1>Teachers In <span th:utext="${schoolName}"></span></h1>
+
+<div class="table">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="teacherDto: ${teacherDtoList}">
+            <td th:text="${teacherDto.teacherId}">Id</td>
+            <td th:text="${teacherDto.teacherFirstName}">Name</td>
+            <td th:text="${teacherDto.teacherLastName}">Address</td>
+            <td><a th:href="@{/deleteTeacherFromSeeTeachers(teacherId=${teacherDto.teacherId},
+            schoolId=${schoolId})}">
+                <i class="fa-solid fa-trash-can" style="color: #7f94b8; padding: 3px;"></i></a>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/schoolAddTeacher(schoolId=${schoolId})}">
+        <input type="button" value="Add Teachers">
+    </a>
+    <a href="schools">
+        <input type="button" value="Back">
+    </a>
+</div>
+
+</body>
+</html>
